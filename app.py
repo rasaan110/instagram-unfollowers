@@ -6,7 +6,7 @@ st.title("📊 Instagram Unfollowers Checker")
 
 # File Upload Widgets
 followers_file = st.file_uploader("Upload your 'Followers' file (followers_1.html)", type="html")
-following_file = st.file_uploader("Upload your 'Following' file (followers_1.html)", type="html")
+following_file = st.file_uploader("Upload your 'Following' file (following.html)", type="html")
 
 if followers_file and following_file:
 
@@ -30,4 +30,5 @@ if followers_file and following_file:
     st.write(f"❌ Don't Follow Back: {len(dont_follow_back)}")
 
     st.subheader("List of People Who Don't Follow You Back")
+
     st.dataframe(df, use_container_width=True)
