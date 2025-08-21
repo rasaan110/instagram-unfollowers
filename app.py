@@ -22,6 +22,7 @@ if followers_file and following_file:
     dont_follow_back = [followed for followed in following if followed not in followers]
 
     df = pd.DataFrame({"Username": dont_follow_back})
+    df.index += 1
 
     # Displaying Results
     st.subheader("Results")
@@ -32,3 +33,4 @@ if followers_file and following_file:
     st.subheader("List of People Who Don't Follow You Back")
 
     st.dataframe(df, use_container_width=True)
+
