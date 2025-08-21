@@ -1,0 +1,33 @@
+import streamlit as st
+import pandas as pd
+from bs4 import BeautifulSoup
+
+st.title("📊 Instagram Unfollowers Checker")
+
+# File Upload Widgets
+followers_file = st.file_uploader("Upload your 'Followers' file (followers_1.html)", type="html")
+following_file = st.file_uploader("Upload your 'Following' file (followers_1.html)", type="html")
+
+if followers_file and following_file:
+
+    followers_soup = BeautifulSoup(followers_file, "html.parser")
+    following_soup = BeautifulSoup(following_file, "html.parser")
+
+    follower_blocks = followers_soup.find_all('div', class_="pam")
+    following_blocks = following_soup.find_all('div', class_="pam")
+
+    followers = [block.find("a").text.strip() for block in follower_blocks if block.find("a")]
+    following = [block.find("a").text.strip() for block in following_blocks if block.find("a")]
+
+    dont_follow_back = [followed for followed in following if followed not in followers]
+
+    df = pd.DataFrame({"Username": dont_follow_back})
+
+    # Displaying Results
+    st.subheader("Results")
+    st.write(f"Total Followers: {len(followers)}")
+    st.write(f"Total Following: {len(following)}")
+    st.write(f"❌ Don't Follow Back: {len(dont_follow_back)}")
+
+    st.subheader("List of People Who Don't Follow You Back")
+    st.dataframe(df, use_container_width=True)
