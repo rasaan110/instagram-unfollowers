@@ -4,7 +4,17 @@ from bs4 import BeautifulSoup
 
 st.title("📊 Instagram Unfollowers Checker")
 
+# Displaying the Tutorial Video
+st.subheader("Video Tutorial")
+try:
+    with open("Tutorial_Insta_Unfollowers_App.mp4", "rb") as tutorial_vid:
+        video_bytes = tutorial_vid.read()
+    st.video(video_bytes)
+except FileNotFoundError:
+    st.error("ERROR: Unable to Display Video")
+
 # File Upload Widgets
+st.subheader("Upload Your Files")
 followers_file = st.file_uploader("Upload your 'Followers' file (followers_1.html)", type="html")
 following_file = st.file_uploader("Upload your 'Following' file (following.html)", type="html")
 
@@ -33,4 +43,3 @@ if followers_file and following_file:
     st.subheader("List of People Who Don't Follow You Back")
 
     st.dataframe(df, use_container_width=True)
-
