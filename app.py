@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 from bs4 import BeautifulSoup
 
+# Page Configuration
+st.set_page_config(page_title = "Instagram Unfollowers", page_icon = "📊", layout = "wide")
+
 st.title("📊 Instagram Unfollowers Checker")
 
 # Displaying the Tutorial Video
@@ -43,3 +46,4 @@ if followers_file and following_file:
     st.subheader("List of People Who Don't Follow You Back")
 
     st.dataframe(df, use_container_width=True)
+
